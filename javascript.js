@@ -12,7 +12,27 @@
 //WHEN I refresh the page
 //THEN the saved events persist
 
-const dateTime = document.getElementById("currentDay");
-dateTime.innerHTML = moment().format('dddd, MMMM Do YYYY, h:mm a');
+//sets the current date and time and makes it visible in the header of the page
+var dateTime = document.getElementById("currentDay");
+dateTime.innerHTML = moment().format("dddd, MMMM Do YYYY, h:mm a");
 
-console.log(dateTime);
+//sets global scope variable for the current hour
+var currentTime = moment().hours();
+
+//runs the function for each textarea tag. this function is what changes the color of the form depending on the time of day
+$("textarea").each(function() {
+  if (parseInt($(this).parent().attr("id")) < parseInt(currentTime) ) {        
+    $(this).removeClass("present");
+    $(this).removeClass("future");
+    $(this).addClass("past")
+  } else if (parseInt($(this).parent().attr("id")) > parseInt(currentTime) ) {
+    $(this).removeClass("present");
+    $(this).removeClass("past");
+    $(this).addClass("future")
+  } else {
+    $(this).removeClass("past");
+    $(this).removeClass("future");
+    $(this).addClass("present")
+  }
+});
+
