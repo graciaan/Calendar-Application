@@ -36,3 +36,15 @@ $("textarea").each(function() {
   }
 });
 
+//using jquery to set savebutton to save whatever is typed in to the forms to localStorage
+$(".saveBtn").on("click", function(){
+  var value = $(this).siblings(".description").val();
+  var time = $(this).parent().attr("id");
+  localStorage.setItem(time, value)
+}
+)
+
+//for loop to display the saved localStorage data on screen
+for(i=0; i < localStorage.length; i++) {
+  $("#"+localStorage.key(i)+" .description").val(localStorage.getItem(localStorage.key(i)));
+}
